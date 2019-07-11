@@ -1,0 +1,17 @@
+{
+  "name": "Timelock",
+  "version": "0.0.1",
+  "description": "A friendly warlock that helps you manage your time!",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["src/background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content.js"]
+    }
+  ],
+  "permissions": ["storage", "tabs", "webNavigation"]
+}
