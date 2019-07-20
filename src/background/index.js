@@ -4,8 +4,8 @@ chrome.runtime.onInstalled.addListener(() => {
 
 const tempUrls = [
   { url: 'twitter.com', time: 60 },
-  { url: 'facebook.com', time: 60 }
-]
+  { url: 'facebook.com', time: 60 },
+];
 
 const timelock = new Controller(tempUrls);
 
