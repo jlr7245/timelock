@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'vga8';
+  src: url('../../assets/vga8.woff2') format('woff2'),
+    url('../../assets/vga8.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.title {
+  font-family: 'vga8', monospace;
+  font-size: 120px;
+  margin-bottom: 100px;
+}
