@@ -1,11 +1,13 @@
-function TimeController(urls) {
-  this.urlList = urls;
-  this.urls = urls.reduce(
+function TimeController(config, currents = {}) {
+  this.urlLookup = config.map(({ url }) => url);
+  this.config = config;
+
+  this.state = config.reduce(
     (acc, { url, time }) =>
-      Object.assign(acc, { [url]: { max: time, current: 0 } }),
+      Object.assign(acc, { [url]: { max: time, current: currents[url] || 0 } }),
     {}
   );
-  this.urlLookup = urls.map(({ url }) => url);
+
   this.currentInterval = null;
 }
 
@@ -17,29 +19,37 @@ TimeController.prototype.createIntervalFor = function(url, tabId) {
   );
   if (!blockedUrl) return;
   this.currentInterval = setInterval(() => {
-    this.urls[blockedUrl].current++;
-    if (this.urls[blockedUrl].current > this.urls[blockedUrl].max) {
+    this.state[blockedUrl].current++;
+    this.updateCurrentFor(blockedUrl, this.state[blockedUrl].current);
+    if (this.state[blockedUrl].current > this.state[blockedUrl].max) {
       this.closeTab(tabId);
     }
-  }, 100);
+  }, 5000);
 };
 
 TimeController.prototype.closeTab = function(tabId) {
   try {
     chrome.tabs.remove(tabId);
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
 };
 
-TimeController.prototype.clearInterval = function(intervalId) {
+TimeController.prototype.clearInterval = function() {
   clearInterval(this.currentInterval);
 };
 
 TimeController.prototype.clearCounters = function() {
-  this.urls = this.urlList.reduce(
+  this.state = this.config.reduce(
     (acc, { url, time }) =>
       Object.assign(acc, { [url]: { max: time, current: 0 } }),
     {}
   );
+  this.urlLookup.forEach(url => {
+    this.updateCurrentFor(url, 0);
+  });
+};
+
+TimeController.prototype.updateCurrentFor = function(url, value) {
+  chrome.storage.sync.set({ [url]: value });
 }
