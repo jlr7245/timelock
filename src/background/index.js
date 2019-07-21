@@ -1,40 +1,95 @@
+let timelock = null;
+
 chrome.runtime.onInstalled.addListener(() => {
   console.log('hello world');
   // serve a page that allows user to add urls
+  // the URLs would then be saved in storage
 });
 
 // delete this later
 const tempUrls = [
-  { url: 'twitter.com', time: 3600 },
-  { url: 'facebook.com', time: 3600 },
-  { url: 'tumblr.com', time: 3600 }
+  { url: 'twitter.com', time: 5 },
+  { url: 'facebook.com', time: 5 },
+  { url: 'tumblr.com', time: 5 },
 ];
+chrome.storage.sync.set({ config: JSON.stringify(tempUrls) }, () => {
+  console.log('storage set with tempUrls');
+});
+// end delete this later
 
-// this should take in something that's set up by the user
-const timelock = new TimeController(tempUrls);
+/* ===== STORAGE HANDLERS ===== */
+const parseURLsAndCreateTimelock = config => {
+  const urls = config.reduce((acc, { url }) => ({ ...acc, [url]: 0 }), {});
+  chrome.storage.sync.get(urls, currents => {
+    timelock = new TimeController(config, currents);
+    initHandlers(timelock);
+  });
+};
 
-/* ===== INTERVAL HANDLERS ===== */
-// when visiting a page from an existing tab
-chrome.webNavigation.onCompleted.addListener(window => {
-  if (window.frameId === 0) {
-    timelock.createIntervalFor(window.url, window.tabId);
+// if the new timelock is created by a change in the settings
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  if (changes.config) {
+    parseURLsAndCreateTimelock(JSON.parse(changes.config.newValue));
   }
 });
 
-// when switching tabs
-chrome.tabs.onActivated.addListener(activeWindow => {
-  const { tabId } = activeWindow;
-  chrome.tabs.get(tabId, tab => {
-    timelock.createIntervalFor(tab.url, tabId);
+// normal initialization on browser open
+if (!timelock) {
+  chrome.storage.sync.get('config', result => {
+    if (result.config) {
+      const config = JSON.parse(result.config);
+      parseURLsAndCreateTimelock(config);
+    } else {
+      console.log('dont forget to set up your timelock!');
+    }
   });
-});
+}
 
-/* ===== ALARMS ===== */
-chrome.alarms.create('cron::clear', {
-  when: fourAMFromNow(),
-  periodInMinutes: 1440,
-});
+/**
+ * initializes chrome event handlers that require timelock instance
+ * to exist before initialization
+ *
+ * @param {TimeController} timelock
+ */
+function initHandlers(timelock) {
+  /* ===== INTERVAL HANDLERS ===== */
+  // when visiting a page from an existing tab
+  chrome.webNavigation.onCompleted.addListener(window => {
+    if (window.frameId === 0) {
+      timelock.createIntervalFor(window.url, window.tabId);
+    }
+  });
 
-chrome.alarms.onAlarm.addListener(alarm => {
-  timelock.clearCounters();
-});
+  // when switching tabs
+  chrome.tabs.onActivated.addListener(activeWindow => {
+    const { tabId } = activeWindow;
+    chrome.tabs.get(tabId, tab => {
+      timelock.createIntervalFor(tab.url, tabId);
+    });
+  });
+
+  // when switching windows
+  chrome.windows.onFocusChanged.addListener(window => {
+    chrome.tabs.query(
+      { active: true, currentWindow: true },
+      ([tab, ...rest]) => {
+        if (tab) {
+          timelock.createIntervalFor(tab.url, tab.id);
+        } else {
+          timelock.clearInterval();
+        }
+      }
+    );
+  });
+
+  /* ===== ALARMS ===== */
+  chrome.alarms.create('cron::clear', {
+    when: fourAMFromNow(),
+    // periodInMinutes: 1440, /* real code */
+    periodInMinutes: 2 /* dev code */,
+  });
+
+  chrome.alarms.onAlarm.addListener(alarm => {
+    timelock.clearCounters();
+  });
+}
