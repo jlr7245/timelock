@@ -1,13 +1,17 @@
-@font-face {
-  font-family: 'vga8';
-  src: url('../../assets/vga8.woff2') format('woff2'),
-    url('../../assets/vga8.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,400i,700&display=swap');
+
+body {
+  font-family: 'Cooper Hewitt', 'IBM Plex Sans', sans-serif;
 }
 
 .title {
   font-family: 'vga8', monospace;
   font-size: 120px;
   margin-bottom: 100px;
+}
+
+.subtitle {
+  font-family: 'Cooper Hewitt', 'IBM Plex Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 350;
 }

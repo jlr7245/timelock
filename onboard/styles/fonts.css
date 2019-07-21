@@ -1,0 +1,103 @@
+@font-face {
+  font-family: 'vga8';
+  src: url('../../assets/vga8.woff2') format('woff2'),
+    url('../../assets/vga8.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-bold-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-bold-webfont.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-bolditalic-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-bolditalic-webfont.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-book-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-book-webfont.woff') format('woff');
+  font-weight: 350;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-bookitalic-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-bookitalic-webfont.woff') format('woff');
+  font-weight: 350;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-heavy-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-heavy-webfont.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-heavyitalic-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-heavyitalic-webfont.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-light-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-light-webfont.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-lightitalic-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-lightitalic-webfont.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-medium-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-medium-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-mediumitalic-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-mediumitalic-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-semibold-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-semibold-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cooper Hewitt';
+  src: url('../../assets/cooperhewitt-semibolditalic-webfont.woff2') format('woff2'),
+    url('../../assets/cooperhewitt-semibolditalic-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+}
