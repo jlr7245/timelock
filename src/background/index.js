@@ -1,9 +1,9 @@
 let timelock = null;
 
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener(installInfo => {
   console.log('hello world');
-  // serve a page that allows user to add urls
-  // the URLs would then be saved in storage
+  console.log(installInfo)
+  chrome.runtime.openOptionsPage();
 });
 
 // delete this later

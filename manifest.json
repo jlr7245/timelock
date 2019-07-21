@@ -7,6 +7,7 @@
     "scripts": ["src/background/utils.js", "src/background/controller.js", "src/background/index.js"],
     "persistent": false
   },
+  "options_page": "onboard/index.html",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
