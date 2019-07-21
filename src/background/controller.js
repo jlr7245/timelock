@@ -21,7 +21,7 @@ TimeController.prototype.createIntervalFor = function(url, tabId) {
     if (this.urls[blockedUrl].current > this.urls[blockedUrl].max) {
       this.closeTab(tabId);
     }
-  }, 1000);
+  }, 100);
 };
 
 TimeController.prototype.closeTab = function(tabId) {

@@ -5,9 +5,9 @@ chrome.runtime.onInstalled.addListener(() => {
 
 // delete this later
 const tempUrls = [
-  { url: 'twitter.com', time: 3600 },
-  { url: 'facebook.com', time: 3600 },
-  { url: 'tumblr.com', time: 3600 }
+  { url: 'twitter.com', time: 60 },
+  { url: 'facebook.com', time: 60 },
+  { url: 'tumblr.com', time: 60 },
 ];
 
 // this should take in something that's set up by the user
@@ -29,10 +29,18 @@ chrome.tabs.onActivated.addListener(activeWindow => {
   });
 });
 
+// when switching windows
+chrome.windows.onFocusChanged.addListener(window => {
+  chrome.tabs.query({ active: true, currentWindow: true }, ([tab, ...rest]) => {
+    timelock.createIntervalFor(tab.url, tab.id);
+  });
+});
+
 /* ===== ALARMS ===== */
 chrome.alarms.create('cron::clear', {
   when: fourAMFromNow(),
-  periodInMinutes: 1440,
+  // periodInMinutes: 1440, /* real code */
+  periodInMinutes: 2 /* dev code */,
 });
 
 chrome.alarms.onAlarm.addListener(alarm => {
