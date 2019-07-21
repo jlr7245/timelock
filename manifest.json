@@ -13,5 +13,5 @@
       "js": ["src/content.js"]
     }
   ],
-  "permissions": ["storage", "tabs", "webNavigation"]
+  "permissions": ["storage", "tabs", "webNavigation", "alarms"]
 }
