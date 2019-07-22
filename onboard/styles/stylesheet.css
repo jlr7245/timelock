@@ -2,16 +2,46 @@
 
 body {
   font-family: 'Cooper Hewitt', 'IBM Plex Sans', sans-serif;
+  line-height: 1.5em;
+  font-weight: 350;
 }
 
+.vga {
+  font-family: 'vga8', monospace;
+}
+
+/* heading */
 .title {
   font-family: 'vga8', monospace;
   font-size: 120px;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
+  line-height: 1em;
 }
 
 .subtitle {
   font-family: 'Cooper Hewitt', 'IBM Plex Sans', sans-serif;
-  font-size: 18px;
-  font-weight: 350;
+  font-size: 24px;
+  line-height: 1.3em;
+}
+
+/* functionality */
+.site-locker-chooser {
+  margin-top: 125px;
+}
+
+.container {
+  width: 50vw;
+  max-width: 1000px;
+  margin: 300px auto 100px 30vw;
+}
+
+@media screen and (max-width: 1000px) {
+  .title {
+    font-size: 60px;
+    margin-bottom: 75px;
+  }
+  .container {
+    margin: 120px auto;
+    width: 80vw;
+  }
 }

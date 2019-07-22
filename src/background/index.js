@@ -2,7 +2,7 @@ let timelock = null;
 
 chrome.runtime.onInstalled.addListener(installInfo => {
   console.log('hello world');
-  console.log(installInfo)
+  console.log(installInfo);
   chrome.runtime.openOptionsPage();
 });
 
@@ -12,7 +12,7 @@ const tempUrls = [
   { url: 'facebook.com', time: 5 },
   { url: 'tumblr.com', time: 5 },
 ];
-chrome.storage.sync.set({ config: JSON.stringify(tempUrls) }, () => {
+chrome.storage.sync.set({ [CONFIG]: JSON.stringify(tempUrls) }, () => {
   console.log('storage set with tempUrls');
 });
 // end delete this later
@@ -35,7 +35,7 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
 
 // normal initialization on browser open
 if (!timelock) {
-  chrome.storage.sync.get('config', result => {
+  chrome.storage.sync.get(CONFIG, result => {
     if (result.config) {
       const config = JSON.parse(result.config);
       parseURLsAndCreateTimelock(config);
@@ -44,6 +44,18 @@ if (!timelock) {
     }
   });
 }
+
+/* ===== MESSAGE HANDLING ===== */
+chrome.runtime.onMessage.addListener(
+  ({ action, message = '' }, sender, res) => {
+    switch (action) {
+      case GET_CONFIG:
+        res({ config: (timelock && timelock.config) || null });
+      default:
+        res({ error: 'action not recognized' });
+    }
+  }
+);
 
 /**
  * initializes chrome event handlers that require timelock instance
