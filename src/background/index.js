@@ -8,9 +8,9 @@ chrome.runtime.onInstalled.addListener(installInfo => {
 
 // delete this later
 const tempUrls = [
-  { url: 'twitter.com', time: 5 },
-  { url: 'facebook.com', time: 5 },
-  { url: 'tumblr.com', time: 5 },
+  { url: 'twitter.com', time: 25/MULTIPLIER },
+  { url: 'facebook.com', time: 25/MULTIPLIER },
+  { url: 'tumblr.com', time: 25/MULTIPLIER },
 ];
 chrome.storage.sync.set({ [CONFIG]: JSON.stringify(tempUrls) }, () => {
   console.log('storage set with tempUrls');
@@ -40,6 +40,7 @@ if (!timelock) {
       const config = JSON.parse(result.config);
       parseURLsAndCreateTimelock(config);
     } else {
+      // this will be a popup
       console.log('dont forget to set up your timelock!');
     }
   });
