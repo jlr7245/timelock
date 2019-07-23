@@ -47,9 +47,6 @@ body {
 }
 
 /* form form form */
-.listholder {
-  display: flex;
-}
 
 form {
   margin-top: 30px;
@@ -61,11 +58,10 @@ legend {
 }
 
 fieldset {
-  flex-grow: 1;
   border-left: 0px;
   border-right: 0px;
   border-bottom: 0px;
   border-color: #ddd;
   border-style: solid;
-  margin: 10px;
+  margin: 10px 0;
 }
