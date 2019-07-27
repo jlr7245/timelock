@@ -2,12 +2,12 @@ const path = require('path');
 
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const onboardConfig = new HTMLWebpackPlugin({
-  template: './onboard/index.html',
+  template: path.join(__dirname, 'onboard', 'index.html'),
   filename: 'index.html',
   chunks: ['onboard']
 });
 const popupConfig = new HTMLWebpackPlugin({
-  template: './popup/index.html',
+  template: path.join(__dirname, 'popup', 'index.html'),
   filename: 'index.html',
   chunks: ['popup']
 });
