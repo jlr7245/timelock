@@ -12,38 +12,47 @@ const popupConfig = new HTMLWebpackPlugin({
   chunks: ['popup']
 });
 
+const alias = {};
+
+const fileExtensions = ["jpg", "jpeg", "png", "gif", "eot", "otf", "svg", "ttf", "woff", "woff2"];
+
+
 module.exports = {
   entry: {
-    popup: path.join(__dirname, 'popup', 'index.js'),
-    options: path.join(__dirname, 'options', 'index.js')
+    popup: path.join(__dirname, 'popup', 'index.jsx'),
+    options: path.join(__dirname, 'onboard', 'index.jsx')
   },
   output: {
-    path: path.join(__dirname, 'ext/[name]'),
-    filename: 'index.bundle.js',
+    path: __dirname + 'ext',
+    filename: '[name]/[name].bundle.js',
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react', 'stage-2'],
-        },
-      },
-      {
-        test: /\.jsx$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react', 'stage-2'],
-        },
-      },
-      {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        loader: "style-loader!css-loader",
+        exclude: /node_modules/
       },
-    ],
+      {
+        test: new RegExp('\.(' + fileExtensions.join('|') + ')$'),
+        loader: "file-loader?name=[name].[ext]",
+        exclude: /node_modules/
+      },
+      {
+        test: /\.html$/,
+        loader: "html-loader",
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(js|jsx)$/,
+        loader: "babel-loader",
+        exclude: /node_modules/
+      }
+    ]
+  },
+  resolve: {
+    alias: alias,
+    extensions: fileExtensions.map(extension => ("." + extension)).concat([".jsx", ".js", ".css"])
   },
   plugins: [onboardConfig, popupConfig],
 };
