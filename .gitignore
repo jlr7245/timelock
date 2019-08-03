@@ -1,2 +1,4 @@
 *.sketch
 node_modules
+.cache
+dist
