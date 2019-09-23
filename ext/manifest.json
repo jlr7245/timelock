@@ -4,13 +4,14 @@
   "description": "A friendly warlock that helps you manage your time!",
   "manifest_version": 2,
   "background": {
-    "scripts": ["src/background/utils.js", "src/background/controller.js", "src/background/index.js"],
+    "scripts": ["background/utils.js", "background/controller.js", "background/index.js"],
     "persistent": false
   },
+  "options_page": "onboard/index.html",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["src/content.js"]
+      "js": ["content.js"]
     }
   ],
   "permissions": ["storage", "tabs", "webNavigation", "alarms"]

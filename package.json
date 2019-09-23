@@ -1,0 +1,36 @@
+{
+  "name": "timelock",
+  "version": "0.0.1",
+  "description": "a friendly warlock to help you manage your time",
+  "main": "src/manifest.json",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlr7245/timelock.git"
+  },
+  "keywords": [
+    "chrome",
+    "extension"
+  ],
+  "author": "J Silverstein",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jlr7245/timelock/issues"
+  },
+  "homepage": "https://github.com/jlr7245/timelock#readme",
+  "dependencies": {
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "parcel-bundler": "^1.12.3",
+    "react-hot-loader": "^4.12.10"
+  }
+}

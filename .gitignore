@@ -1,1 +1,12 @@
 *.sketch
+node_modules
+.cache
+dist
+ext/onboard/*.js
+ext/onboard/*.js.map
+ext/onboard/*.css
+ext/onboard/*.css.map
+ext/popup/*.js
+ext/popup/*.js.map
+ext/popup/*.css
+ext/popup/*.css.map
