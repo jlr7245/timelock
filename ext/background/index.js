@@ -1,9 +1,8 @@
 let timelock = null;
 
-chrome.runtime.onInstalled.addListener(installInfo => {
-  console.log('hello world');
-  console.log(installInfo);
-  chrome.runtime.openOptionsPage();
+chrome.runtime.onInstalled.addListener(({ reason }) => {
+  if (reason === 'install')
+    chrome.runtime.openOptionsPage();
 });
 
 // delete this later
@@ -40,6 +39,7 @@ if (!timelock) {
       const config = JSON.parse(result.config);
       parseURLsAndCreateTimelock(config);
     } else {
+      // open the popup!
       console.log('dont forget to set up your timelock!');
     }
   });
@@ -89,7 +89,8 @@ function initHandlers(timelock) {
     periodInMinutes: 2 /* dev code */,
   });
 
-  chrome.alarms.onAlarm.addListener(alarm => {
-    timelock.clearCounters();
+  chrome.alarms.onAlarm.addListener(({ name }) => {
+    if (name === 'cron::clear')
+      timelock.clearCounters();
   });
 }
