@@ -28,7 +28,7 @@ const parseURLsAndCreateTimelock = config => {
 // if the new timelock is created by a change in the settings
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (changes.config) {
-    parseURLsAndCreateTimelock(JSON.parse(changes.config.newValue));
+    parseURLsAndCreateTimelock(changes.config.newValue);
   }
 });
 
