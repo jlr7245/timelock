@@ -6,7 +6,7 @@ let storageStub = {
   'twitter.com': 6,
 };
 
-export const getFromStorage = (keys, callback) => {
+export const getFromStorage = (keys, cb) => {
   if (Array.isArray(keys)) {
     const result = keys.reduce(
       (acc, key) => ({
@@ -15,15 +15,16 @@ export const getFromStorage = (keys, callback) => {
       }),
       {}
     );
-    callback(result);
-  } else if (key) callback(storageStub[key]);
-  else callback(storageStub);
+    console.log(result)
+    cb(result);
+  } else if (keys) cb(storageStub[keys]);
+  else cb(storageStub);
 };
 
-export const setStorage = (values, callback) => {
+export const setStorage = (values, cb) => {
   storageStub = {
     ...storageStub,
     ...values,
   };
-  callback(true);
+  cb(true);
 };

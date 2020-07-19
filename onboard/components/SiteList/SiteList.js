@@ -11,7 +11,7 @@ import { getFromStorage } from '../../../shared/utils.stub';
 const SiteList = () => {
   const [showModal, setShowModal] = useState(false);
   const [config, setConfig] = useState([]);
-  getFromStorage('config', result => setConfig(result.config));
+  if (!config || !config.length) getFromStorage('config', result => setConfig(result.config));
   return (
     <div className="add-site-container">
       <button onClick={() => setShowModal(true)} className="base add-site vga">
@@ -22,7 +22,7 @@ const SiteList = () => {
           <p>Add site form goes here</p>
         </Modal>
       )}
-      {config.length && <div>List of sites here</div>}
+      {config && config.length ? <div>List of sites here</div> : null}
     </div>
   );
 };
