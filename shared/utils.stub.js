@@ -1,6 +1,9 @@
 let storageStub = {
-  config:
-    '[{"url":"twitter.com","time":5},{"url":"facebook.com","time":5},{"url":"tumblr.com","time":5}]',
+  config: [
+    { url: 'twitter.com', time: 50 },
+    { url: 'facebook.com', time: 50 },
+    { url: 'tumblr.com', time: 50 },
+  ],
   'facebook.com': 0,
   'tumblr.com': 0,
   'twitter.com': 6,
@@ -15,10 +18,11 @@ export const getFromStorage = (keys, cb) => {
       }),
       {}
     );
-    console.log(result)
+    console.log(result);
     cb(result);
-  } else if (keys) cb(storageStub[keys]);
-  else cb(storageStub);
+  } else if (typeof keys === 'string') cb({ [keys]: storageStub[keys] });
+  else if (keys === null) cb(storageStub);
+  else throw new Error('Invalid keys');
 };
 
 export const setStorage = (values, cb) => {

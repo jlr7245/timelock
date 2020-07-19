@@ -1,0 +1,36 @@
+.sli {
+  width: 100%;
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+}
+
+.sli-site {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  padding: 20px;
+  align-items: baseline;
+}
+
+.site-url {
+  font-size: 2.5em;
+  margin-left: 30px;
+}
+
+.sli-label {
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.sli-time {
+  display: flex;
+  padding: 20px;
+  align-items: baseline;
+}
+
+.time {
+  font-size: 1.8em;
+  margin: 0 10px 0 20px;
+}
+

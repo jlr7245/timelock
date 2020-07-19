@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SiteList.styles.css';
 
 import { Modal } from '../../../shared';
 // for dev
 import { getFromStorage } from '../../../shared/utils.stub';
+import SiteListItem from './SiteListItem';
 // for build
 // import { getFromStorage } from '../../../shared/utils';
-
 
 const SiteList = () => {
   const [showModal, setShowModal] = useState(false);
   const [config, setConfig] = useState([]);
-  if (!config || !config.length) getFromStorage('config', result => setConfig(result.config));
+  useEffect(
+    () => getFromStorage('config', (result) => setConfig(result.config)),
+    []
+  );
+  console.log(config);
   return (
     <div className="add-site-container">
       <button onClick={() => setShowModal(true)} className="base add-site vga">
@@ -22,7 +26,9 @@ const SiteList = () => {
           <p>Add site form goes here</p>
         </Modal>
       )}
-      {config && config.length ? <div>List of sites here</div> : null}
+      {config.length
+        ? config.map((site, i) => <SiteListItem key={i} {...site} />)
+        : null}
     </div>
   );
 };
