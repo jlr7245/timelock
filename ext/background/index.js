@@ -11,7 +11,7 @@ const tempUrls = [
   { url: 'facebook.com', time: 5 },
   { url: 'tumblr.com', time: 5 },
 ];
-chrome.storage.sync.set({ config: JSON.stringify(tempUrls) }, () => {
+chrome.storage.sync.set({ config: tempUrls }, () => {
   console.log('storage set with tempUrls');
 });
 // end delete this later
@@ -36,7 +36,7 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
 if (!timelock) {
   chrome.storage.sync.get('config', result => {
     if (result.config) {
-      const config = JSON.parse(result.config);
+      const config = result.config;
       parseURLsAndCreateTimelock(config);
     } else {
       // open the popup!
