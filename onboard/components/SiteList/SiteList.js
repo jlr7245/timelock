@@ -15,7 +15,6 @@ const SiteList = () => {
     () => getFromStorage('config', (result) => setConfig(result.config)),
     []
   );
-  console.log(config);
   return (
     <div className="add-site-container">
       <button onClick={() => setShowModal(true)} className="base add-site vga">
