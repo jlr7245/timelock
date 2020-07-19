@@ -48,7 +48,7 @@ body {
 }
 
 /* general buttons */
-button {
+button.base {
   border: 3px solid blue;
   border-radius: 20px;
   font-size: 1.3em;
@@ -58,7 +58,13 @@ button {
   transition: all 0.1s;
 }
 
-button:hover {
+button.base:hover {
   background-color: blue;
   color: white;
+}
+
+button.blend {
+  border: 0px;
+  background-color: #FFFFFFFF;
+  cursor: pointer;
 }

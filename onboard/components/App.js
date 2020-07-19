@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.styles.css';
 
-import AddSite from './AddSite'
+import SiteList from './SiteList'
 
 const App = () => (
   <div className="container">
@@ -10,7 +10,7 @@ const App = () => (
       A friendly warlock to help you with your time management by locking away
       various sites.
     </h3>
-    <AddSite />
+    <SiteList />
   </div>
 );
 
