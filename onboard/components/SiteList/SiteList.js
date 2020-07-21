@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './SiteList.styles.css';
 
 import { Modal } from '../../../shared';
+import SiteListItem from './SiteListItem';
+
 // for dev
 import { getFromStorage } from '../../../shared/utils.stub';
-import SiteListItem from './SiteListItem';
 // for build
 // import { getFromStorage } from '../../../shared/utils';
 
