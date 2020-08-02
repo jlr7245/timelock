@@ -49,7 +49,7 @@ body {
 
 /* general buttons */
 button.base {
-  border: 3px solid blue;
+  border: 3px solid rgb(183,214,170);
   border-radius: 20px;
   font-size: 1.3em;
   background-color: #FFFFFFFF;
@@ -59,7 +59,7 @@ button.base {
 }
 
 button.base:hover {
-  background-color: blue;
+  background-color: rgb(183,214,170);
   color: white;
 }
 

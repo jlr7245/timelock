@@ -1,12 +1,12 @@
 let storageStub = {
   config: [
-    { url: 'twitter.com', time: 50 },
-    { url: 'facebook.com', time: 50 },
-    { url: 'tumblr.com', time: 50 },
+    { url: 'twitter.com', time: 500 },
+    { url: 'facebook.com', time: 500 },
+    { url: 'tumblr.com', time: 500 },
   ],
   'facebook.com': 0,
   'tumblr.com': 0,
-  'twitter.com': 6,
+  'twitter.com': 250,
 };
 
 export const getFromStorage = (keys, cb) => {
@@ -18,7 +18,6 @@ export const getFromStorage = (keys, cb) => {
       }),
       {}
     );
-    console.log(result);
     cb(result);
   } else if (typeof keys === 'string') cb({ [keys]: storageStub[keys] });
   else if (keys === null) cb(storageStub);

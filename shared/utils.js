@@ -19,3 +19,23 @@ export const getHMFrom5S = (seconds) => {
 
 export const get5SFromHM = (hours, minutes) =>
   Math.round((hours * 3600 + minutes * 60) / 5);
+
+export const attachTimesToConfig = (config, sites) => {
+  return config.map(site => {
+    return {
+      ...site,
+      timeUsed: sites[site.url],
+    }
+  });
+};
+
+const LOW = 'low';
+const MEDIUM = 'medium';
+const HIGH = 'high';
+
+export const getHMLFrom5SDiff = (total, used) => {
+  const ratio = used / total;
+  if (ratio < 0.3) return HIGH;
+  if (ratio < 0.7) return MEDIUM;
+  return LOW;
+}

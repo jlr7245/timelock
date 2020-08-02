@@ -6,14 +6,17 @@ import SiteListItem from './SiteListItem';
 
 // for dev
 import { getFromStorage } from '../../../shared/utils.stub';
-// for build
-// import { getFromStorage } from '../../../shared/utils';
+// for build add getFromStorage here
+import { attachTimesToConfig } from '../../../shared/utils';
 
 const SiteList = () => {
   const [showModal, setShowModal] = useState(false);
   const [config, setConfig] = useState([]);
   useEffect(
-    () => getFromStorage('config', (result) => setConfig(result.config)),
+    () =>
+      getFromStorage(null, ({ config, ...sites }) =>
+        setConfig(attachTimesToConfig(config, sites))
+      ),
     []
   );
   return (
