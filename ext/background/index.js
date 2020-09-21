@@ -1,9 +1,8 @@
 let timelock = null;
 
-chrome.runtime.onInstalled.addListener(installInfo => {
-  console.log('hello world');
-  console.log(installInfo);
-  chrome.runtime.openOptionsPage();
+chrome.runtime.onInstalled.addListener(({ reason }) => {
+  if (reason === 'install')
+    chrome.runtime.openOptionsPage();
 });
 
 // delete this later
@@ -12,7 +11,7 @@ const tempUrls = [
   { url: 'facebook.com', time: 5 },
   { url: 'tumblr.com', time: 5 },
 ];
-chrome.storage.sync.set({ config: JSON.stringify(tempUrls) }, () => {
+chrome.storage.sync.set({ config: tempUrls }, () => {
   console.log('storage set with tempUrls');
 });
 // end delete this later
@@ -29,7 +28,7 @@ const parseURLsAndCreateTimelock = config => {
 // if the new timelock is created by a change in the settings
 chrome.storage.onChanged.addListener((changes, namespace) => {
   if (changes.config) {
-    parseURLsAndCreateTimelock(JSON.parse(changes.config.newValue));
+    parseURLsAndCreateTimelock(changes.config.newValue);
   }
 });
 
@@ -37,9 +36,10 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
 if (!timelock) {
   chrome.storage.sync.get('config', result => {
     if (result.config) {
-      const config = JSON.parse(result.config);
+      const config = result.config;
       parseURLsAndCreateTimelock(config);
     } else {
+      // open the popup!
       console.log('dont forget to set up your timelock!');
     }
   });
@@ -89,7 +89,8 @@ function initHandlers(timelock) {
     periodInMinutes: 2 /* dev code */,
   });
 
-  chrome.alarms.onAlarm.addListener(alarm => {
-    timelock.clearCounters();
+  chrome.alarms.onAlarm.addListener(({ name }) => {
+    if (name === 'cron::clear')
+      timelock.clearCounters();
   });
 }

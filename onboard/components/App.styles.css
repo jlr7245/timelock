@@ -1,3 +1,16 @@
+body {
+  font-family: 'Cooper Hewitt', 'IBM Plex Sans', sans-serif;
+}
+
+.vga {
+  font-family: 'vga8', monospace;
+  letter-spacing: 1px;
+}
+
+.ch {
+  font-family: 'Cooper Hewitt', 'IBM Plex Sans', sans-serif;
+}
+
 /* heading */
 .title {
   font-family: 'vga8', monospace;
@@ -7,9 +20,9 @@
 }
 
 .subtitle {
-  font-family: 'Cooper Hewitt', 'IBM Plex Sans', sans-serif;
   font-size: 24px;
   line-height: 1.3em;
+  font-weight: 100;
 }
 
 /* functionality */
@@ -32,4 +45,26 @@
     margin: 120px auto;
     width: 80vw;
   }
+}
+
+/* general buttons */
+button.base {
+  border: 3px solid rgb(183,214,170);
+  border-radius: 20px;
+  font-size: 1.3em;
+  background-color: #FFFFFFFF;
+  padding: 5px 20px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+button.base:hover {
+  background-color: rgb(183,214,170);
+  color: white;
+}
+
+button.blend {
+  border: 0px;
+  background-color: #FFFFFFFF;
+  cursor: pointer;
 }
